@@ -1,0 +1,10 @@
+{
+  "Resources": {
+    "testS3deployHelloBucket01092012": {
+      "Type": "AWS::S3::Bucket",
+      "Properties": {
+        "AccessControl": "PublicRead"
+      }
+    }
+  }
+}
