@@ -1,10 +1,22 @@
+
 {
-  "Resources": {
-    "ChrisCo0312": {
-      "Type": "AWS::S3::Bucket",
-      "Properties": {
-        "AccessControl": "PublicRead"
-      }
+  "AWSTemplateFormatVersion": "2010-09-09",
+  "Parameters": {
+    "BucketName": {
+        "Description": "Donner un nom sans signe particulier",
+        "Type": "String",
+        "Default": "ericsatie",
+        "AllowedPattern": "[a-z]+^[0-9]+",
+        "ConstraintDescription": "Malformed input-Parameter "
     }
+},
+  "Resources": {
+      "Bucket": {
+          "Type": "AWS::S3::Bucket",
+          "Properties": {
+              "BucketName" : {"Ref":"BucketName"},                
+              "AccessControl": "PublicRead"
+          }
+      }
   }
 }
