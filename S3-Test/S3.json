@@ -5,9 +5,8 @@
     "BucketName": {
         "Description": "Donner un nom sans signe particulier",
         "Type": "String",
-        "Default": "ericsatie",
-        "AllowedPattern": "[a-z]+^[0-9]+",
-        "ConstraintDescription": "Malformed input-Parameter "
+        "AllowedPattern": "(?=^.{3,63}$)(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)",
+        "ConstraintDescription": "probleme avec la convention de nommage"
     }
 },
   "Resources": {
@@ -20,3 +19,4 @@
       }
   }
 }
+
