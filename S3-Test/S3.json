@@ -21,8 +21,8 @@
   "Outputs" : {
       "BucketARN":{
         "Description" : "the arn of the resource",
-        "Value" : {"Fn::Join" : [":",["arn", "aws", "s3", {"Ref":"BucketName"}]]}
+        "Value" : {"Fn::Join" : [":",["arn", "aws", "s3::", {"Ref":"BucketName"}]]},
+        "Export" : {"Name" : {"Fn::Join": [ ":", [ { "Ref" : "AWS::StackName" }, "christel" ]]}}
     }
-  
 }
 }
