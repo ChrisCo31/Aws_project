@@ -17,6 +17,12 @@
               "AccessControl": "PublicRead"
           }
       }
-  }
+  },
+  "Outputs" : {
+      "BucketARN":{
+        "Description" : "the arn of the resource",
+        "Value" : {"Fn::Join" : [":",["arn", "aws", "s3", {"Ref":"BucketName"}]]}
+    }
+  
 }
-
+}
