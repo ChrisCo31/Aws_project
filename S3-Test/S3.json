@@ -18,13 +18,11 @@
           }
       }
   },
-  "Outputs" : {
-      "BucketARN":{
+   "Outputs" : {
+    "BucketARN":{
         "Description" : "the arn of the resource",
-        "Value" : {"Fn::Join" : [":",["arn", "aws", "s3::", {"Ref":"BucketName"}]]},
-        "Export" : {"Name" : {"Fn::Join": [ ":", [ { "Ref" : "AWS::StackName" }, "christel" ]]}}
-    },
-        "MyStacksRegion" : { "Value" : { "Ref" : "AWS::Region" } },
-        "MyPartition" : { "Value" : { "Ref" : "AWS::Partition" } }
+        "Value" : { "Fn::GetAtt" : [ "Bucket", "Arn" ]}
+
+  }
 }
 }
