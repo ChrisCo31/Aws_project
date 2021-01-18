@@ -1,0 +1,41 @@
+{
+  "AWSTemplateFormatVersion": "2010-09-09",
+
+  "Metadata" : {
+    "AWS::CloudFormation::Interface" : {
+      "ParameterGroups" : [
+        {
+          "Label" : { "default" : "S3 Configuration" },
+          "Parameters" : [ "BucketName"]
+        }
+      ],
+      "ParameterLabels" : {
+        "BucketName" : { "default" : "Which name would you give to your bucket?" }
+      }
+    }
+  },
+  "Parameters": {
+    "BucketName": {
+        "Description": "Donner un nom sans signe particulier",
+        "Type": "String",
+        "AllowedPattern": "(?=^.{3,63}$)(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)",
+        "ConstraintDescription": "probleme avec la convention de nommage"
+    }
+ },
+  "Resources": {
+      "Bucket": {
+          "Type": "AWS::S3::Bucket",
+          "Properties": {
+              "BucketName" : {"Ref":"BucketName"},                
+              "AccessControl": "PublicRead"
+          }
+      }
+  },
+   "Outputs" : {
+    "BucketARN":{
+        "Description" : "the arn of the resource",
+        "Value" : { "Fn::GetAtt" : [ "Bucket", "Arn" ]}
+
+  }
+ }
+}
