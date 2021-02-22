@@ -6,22 +6,34 @@
       "ParameterGroups" : [
         {
           "Label" : { "default" : "S3 Configuration" },
-          "Parameters" : [ "BucketName"]
+          "Parameters" : [ "BucketName", "EnvType"]
         }
       ],
       "ParameterLabels" : {
-        "BucketName" : { "default" : "Which name would you give to your bucket?" }
+        "BucketName" : { "default" : "Which name would you give to your bucket?" },
+        "EnvType" : { "default" : "Specify environment" }
       }
     }
   },
   "Parameters": {
     "BucketName": {
-        "Description": "Donner un nom sans signe particulier",
+        "Description": "a name without particuliar sign",
         "Type": "String",
         "AllowedPattern": "(?=^.{3,63}$)(?!^(\\d+\\.)+\\d+$)(^(([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])\\.)*([a-z0-9]|[a-z0-9][a-z0-9\\-]*[a-z0-9])$)",
         "ConstraintDescription": "probleme avec la convention de nommage"
+    },
+    "EnvType" : {
+      "Description" : "Environment type.",
+      "Default" : "test",
+      "Type" : "String",
+      "AllowedValues" : ["prod", "dev", "test", "preprod"],
+      "ConstraintDescription" : "must specify prod, dev, preprod or test."
     }
  },
+ "Conditions" : {
+  "CreateProdResources" : {"Fn::Equals" : [{"Ref" : "EnvType"}, "prod"]},
+  "CreateDevResources" : {"Fn::Equals" : [{"Ref" : "EnvType"}, "dev"]}
+},
   "Resources": {
       "Bucket": {
           "Type": "AWS::S3::Bucket",
@@ -39,3 +51,4 @@
   }
  }
 }
+
