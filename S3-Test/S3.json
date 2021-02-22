@@ -38,7 +38,7 @@
       "Bucket": {
           "Type": "AWS::S3::Bucket",
           "Properties": {
-              "BucketName" : {"Ref":"BucketName"},                
+              "BucketName" : {"Fn::Join":["-", [{"Ref":"BucketName"}, "prod"]]},              
               "AccessControl": "PublicRead"
           }
       }
